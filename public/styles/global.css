@@ -7,6 +7,15 @@
 	text-align: center;
 }
 
+.menu_block {
+	text-align: center;
+}
+
+.menu_block a, .menu_separator {
+	margin-right: 10px;
+	display: inline;
+}
+
 .content_block {
 	margin-top: 20px;
 }

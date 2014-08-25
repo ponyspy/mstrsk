@@ -1,0 +1,53 @@
+extends ../../layout
+
+block title
+	title ДОБАВИТЬ СОБЫТИЕ
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/styles/add.css')
+
+block content_scripts
+	script(type='text/javascript', src='/scripts/add.js')
+
+block content_right
+	.navigator
+		.nav_title СОБЫТИЕ
+		.nav_project_children
+		br
+		b.nav_settings_title настройки
+		.toggle_eng перевод
+		br
+		b.form_submit ОТПРАВИТЬ
+
+block content
+	.form_block
+		a.back_link(href='/auth/events') < Назад
+		.title ДОБАВИТЬ СОБЫТИЕ
+		form(action="/auth/events/add", method="post")
+			.form_title Заголовок:
+			input.ru(type="text", name="ru[title]",)
+			input.en(type="text", name="en[title]", disabled)
+			.form_title Подзаголовок:
+			input.ru(type="text", name="ru[s_title]",)
+			input.en(type="text", name="en[s_title]", disabled)
+			.form_title Описание:
+			textarea.ru(name="ru[description]", rows="8",)
+			textarea.en(name="en[description]", rows="8", disabled)
+			.form_title Участники:
+			|Имя:
+			input(type="text", name="member[name]",)
+			|Описание:
+			input(type="text", name="member[description]",)
+			.form_title Тип:
+			select.hall(name='type')
+				option(value='club') клуб
+				option(value='theatr') театр
+			.form_title Категория:
+			select.hall(name='category')
+				option(value='concert') концерт
+				option(value='party') вечеринка
+			.form_title Постер:
+			input(type="file", name="poster")
+			br
+			br
+			input(type='submit', value='отправить')

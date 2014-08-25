@@ -8,8 +8,13 @@ block content_style
 
 block content
 	a.back_link(href='/logout') Выход
-	.title.star ЗВЕЗДОЧЕТ
+	.title ЗВЕЗДОЧЕТ
 	.main_menu_block
 		br
-		b Посты:
-		a(href='/auth/posts')= ' редактировать'
+		br
+		b События:
+		a(href='/auth/events')= ' редактировать'
+		br
+		br
+		b Расписание:
+		a(href='/auth/schedule')= ' редактировать'

@@ -50,6 +50,7 @@ app.use(function(req, res, next) {
 // -------------------
 
 
+var User = models.User;
 var Event = models.Event;
 var Schedule = models.Schedule;
 
@@ -142,35 +143,36 @@ app.route('/auth').get(checkAuth, function (req, res) {
 // ------------------------
 
 
-app.route('/auth/posts').get(checkAuth, function(req, res) {
-  Post.find().exec(function(err, posts) {
-    res.render('auth/posts/', {posts: posts});
+app.route('/auth/events').get(checkAuth, function(req, res) {
+  Event.find().exec(function(err, events) {
+    res.render('auth/events/', {events: events});
   });
 });
 
 
 // ------------------------
-// *** Add Posts Block ***
+// *** Add Events Block ***
 // ------------------------
 
 
-var add_posts= app.route('/auth/posts/add');
+var add_events= app.route('/auth/events/add');
 
-add_posts.get(checkAuth, function(req, res) {
-  res.render('auth/posts/add.jade');
+add_events.get(checkAuth, function(req, res) {
+  res.render('auth/events/add.jade');
 });
 
-add_posts.post(checkAuth, function(req, res) {
+add_events.post(checkAuth, function(req, res) {
   var post = req.body;
   var files = req.files;
 
-  var post_item = new Post();
+  var event = new Event();
 
-  post_item.title.ru = post.ru.title;
-  post_item.description.ru = post.ru.description;
+  event.title.ru = post.ru.title;
+  event.s_title.ru = post.ru.s_title;
+  event.description.ru = post.ru.description;
 
-  post_item.save(function(err, post_item) {
-    res.redirect('/auth/posts');
+  event.save(function(err, event) {
+    res.redirect('/auth/events');
   });
 });
 
@@ -301,36 +303,36 @@ app.route('/robots.txt').get(function(req, res){
 // ------------------------
 
 
-app.use(function(req, res, next) {
-  var accept = accepts(req);
-  res.status(404);
+// app.use(function(req, res, next) {
+//   var accept = accepts(req);
+//   res.status(404);
 
-  // respond with html page
-  if (accept.types('html')) {
-    res.render('error', { url: req.url, status: 404 });
-    return;
-  }
+//   // respond with html page
+//   if (accept.types('html')) {
+//     res.render('error', { url: req.url, status: 404 });
+//     return;
+//   }
 
-  // respond with json
-  if (accept.types('json')) {
-      res.send({
-      error: {
-        status: 'Not found'
-      }
-    });
-    return;
-  }
+//   // respond with json
+//   if (accept.types('json')) {
+//       res.send({
+//       error: {
+//         status: 'Not found'
+//       }
+//     });
+//     return;
+//   }
 
-  // default to plain-text
-  res.type('txt').send('Not found');
-});
+//   // default to plain-text
+//   res.type('txt').send('Not found');
+// });
 
-app.use(function(err, req, res, next) {
-  var status = err.status || 500;
+// app.use(function(err, req, res, next) {
+//   var status = err.status || 500;
 
-  res.status(status);
-  res.render('error', { error: err, status: status });
-});
+//   res.status(status);
+//   res.render('error', { error: err, status: status });
+// });
 
 
 // ------------------------

@@ -1,7 +1,7 @@
 extends ../../layout
 
 block title
-	title СПИСОК ПОСТОВ
+	title СПИСОК СОБЫТИЙ
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/styles/add.css')
@@ -11,14 +11,14 @@ block content_scripts
 
 block content
 	a.back_link(href='/auth') < Назад
-	.title СПИСОК ПОСТОВ
+	.title СПИСОК СОБЫТИЙ
 	br
-	a.add(href='/auth/posts/add') добавить пост
+	a.add(href='/auth/events/add') добавить событие
 	br
 	br
 	.main_menu_block
-		each post in posts
-			.post
-				a.rm_post(href='#', id=post._id)= 'удалить '
+		each event in events
+			.event
+				a.rm_event(href='#', id=event._id)= 'удалить '
 				!=' | '
-				a(href='/auth/posts/edit/' + post._id)= post.title.ru
+				a(href='/auth/events/edit/' + event._id)= event.title.ru

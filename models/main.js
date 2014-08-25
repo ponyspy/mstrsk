@@ -58,5 +58,6 @@ var scheduleSchema = new Schema({
 // ------------------------
 
 
+module.exports.User = mongoose.model('User', userSchema);
 module.exports.Event = mongoose.model('Event', eventSchema);
 module.exports.Schedule = mongoose.model('Schedule', scheduleSchema);
