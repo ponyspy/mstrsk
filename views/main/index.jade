@@ -1,0 +1,33 @@
+extends ../layout
+
+block title
+	title Мастерская
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/styles/main.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/scripts/main.js' + version)
+
+mixin eventItem(event, type)
+	if (event.event.type == type)
+		.event_block
+			.event_category= event.event.category
+			.event_time= event.time.hours + ':' + event.time.minutes
+			.event_price= event.event.price
+			.event_title= event.event.title.ru
+			.event_s_title= event.event.s_title.ru
+
+
+block content
+	.banner_block
+	.schedule_block
+		each item in schedule
+			.schedule_item
+				.schedule_date= item.date.getDate() + ' : ' + item.date.getMonth()
+				.theatre_block
+					each event in item.events
+						+eventItem(event, 'theatre')
+				.club_block
+					each event in item.events
+						+eventItem(event, 'club')

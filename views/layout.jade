@@ -1,0 +1,26 @@
+doctype html
+html
+	head
+		include header
+	body
+		- var date = new Date()
+		//- include counters
+		.main_block
+			.header_block
+				.head_title_block
+					img.logo_left(src='/path')
+					a.logo(href='/')
+						img.logo_image(src='/path')
+					img.logo_right(src='/path')
+				.menu_block
+					a(href='/about') О мастерской
+					a(href='/food') Еда
+					a(href='/request_theatre') Заявка для театров
+					a(href='/theatre') Театр
+					.menu_separator И
+					a(href='/club') Клуб
+					a(href='/request_club') Заявка для музыкантов
+					a(href='/contacts') Контакты
+			.content_block
+				block content
+			.footer_block футер
